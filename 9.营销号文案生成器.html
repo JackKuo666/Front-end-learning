@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>营销号文案生成器</title>
+    <style>
+        .title{
+            top: 300px;
+            left: 800px;
+            position: absolute;
+        }
+        .container{
+            top: 300px;
+            left: 600px;
+            position: absolute;
+        }
+        .left{
+            top: 80px;
+            left: 1px;
+            position: relative;
+
+        }
+        .text {
+            top: 80px;
+            left: 300px;
+            position: absolute;
+            resize: none;
+            overflow: hidden;
+            width: 300px;
+            min-height: 50px;
+        }
+        lable {
+            font-weight: bold;
+        }
+
+        #footer {
+            text-align: center;
+        }
+        button {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <script>
+        function auto_grow(element) {
+            element.style.height = "5px";
+            element.style.height = (element.scrollHeight) + "px";
+        }
+        function onload() {
+            auto_grow(document.getElementById("result"))
+        }
+        function generate() {
+            subject = document.getElementById("subject").value;
+            event1 = document.getElementById("event1").value;
+            event2 = document.getElementById("event2").value;
+            if(subject.length == 0 || event1.length == 0 || event2.length == 0){
+                return;
+            }
+            result = `　　${subject}${event1}是怎么回事呢？${subject}相信大家都很熟悉，但是${subject}${event1}是怎么回事呢，下面就让小编带大家一起了解吧。\r\n　　${subject}${event1}，其实就是${event2}，大家可能会很惊讶${subject}怎么会${event1}呢？但事实就是这样，小编也感到非常惊讶。\r\n　　这就是关于${subject}${event1}的事情了，大家有什么想法呢，欢迎在评论区告诉小编一起讨论哦！`;
+            document.getElementById("result").value = result;
+            auto_grow(document.getElementById("result"));
+
+        }
+
+
+    </script>
+
+</head>
+<body onload="onload()">
+    <h3 class="title">营销号文章生成器</h3>
+    <div class="container">
+        <div class="left">
+            <div class="col-sm-5 col-xs-12">
+                <form action="javascript:void(0);" autocomplete="off">
+                    <div class="form-group">
+                        <label for="subject">主体：</label>
+                        <input type="text" id="subject" class="form-control" placeholder="桃子核" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="event1">事件：</label>
+                        <input type="text" id="event1" class="form-control" placeholder="不能吞下去" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="event2">另一种说法：</label>
+                        <input type="text" id="event2" class="form-control" placeholder="桃核太大了，吞下去容易噎着" required>
+                    </div>
+
+                    <input type="submit" value="生成" class="btn btn-primary" onclick="generate()" />
+                </form>
+            </div>
+        </div>
+
+        <textarea class="text" id="result" onchange="auto_grow(this)" oninput="auto_grow(this)" placeholder="　　桃子核不能吞下去是怎么回事呢？桃子核相信大家都很熟悉，但是桃子核不能吞下去是怎么回事呢，下面就让小编带大家一起了解吧。&#013;&#010;　　桃子核不能吞下去，其实就是桃核太大了，吞下去容易噎着，大家可能会很惊讶桃子核怎么会不能吞下去呢？但事实就是这样，小编也感到非常惊讶。&#013;&#010;　　这就是关于桃子核不能吞下去的事情了，大家有什么想法呢，欢迎在评论区告诉小编一起讨论哦！"></textarea>
+
+
+    </div>
+
+
+</body>
+</html>
