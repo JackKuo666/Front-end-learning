@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件中的data和methods</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <mycom1></mycom1>
+    </div>
+
+    <div id="app2">
+        <hr/>
+        <p>这里需要说明的是: 自定义组件私有的data和methods就行一个方法中的属性,在多次使用这个组件的时候,相互之间的数据不会影响</p>
+        <mycom2></mycom2>
+        <mycom2></mycom2>
+    </div>
+
+    <template id = "tmp2">
+        <div>
+            <input type="button" value="自增" @click="increment">
+            <h3>{{ count }}</h3>
+        </div>
+    </template>
+
+
+
+    <script>
+        Vue.component("mycom1", {
+            template: "<h3>1.这个是全局组件---{{ msg }}</h3>",
+            data: function () {
+                return{
+                    msg: "这个是组件中的data定义的数据"
+                }
+
+            }
+        });
+
+        Vue.component("mycom2", {
+            template: "#tmp2",
+            data: function () {
+                return{
+                    count: 0,
+                }
+            },
+            methods: {
+                increment(){
+                    this.count++
+                }
+            }
+        });
+
+
+        var vm = new Vue({
+            el: "#app",
+            data:{},
+            methods:{}
+        });
+        var vm2 = new Vue({
+            el: "#app2",
+            data:{},
+            methods:{}
+        })
+
+    </script>
+</body>
+</html>

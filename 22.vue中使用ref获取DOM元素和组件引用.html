@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中通过ref获取DOM元素和组件引用</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <input type="button" value="使用ref 获得h3" @click="getElement">
+        <h3 ref="myh3">这个是h3 DOM 元素, vue 可以通过自带的 ref 属性获得</h3>
+        <p>点击按钮获得DOM元素: {{ result }}</p>
+        <hr />
+
+        <login ref="my_login"></login>
+        <p>点击按钮获得子组件data: {{ son_data }}</p>
+        <p>点击按钮获得子组件methods: {{ son_methods }}</p>
+    </div>
+
+    <template id="login">
+        <h3>登录组件</h3>
+    </template>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                result: "",
+                son_data: "",
+                son_methods:""
+            },
+            methods: {
+                getElement(){
+                    this.result = this.$refs.myh3.innerText;
+                    this.son_data = this.$refs.my_login.msg;
+                    this.son_methods = this.$refs.my_login.show();
+                }
+            },
+            components:{
+                login:{
+                    template: "#login",
+                    data() {
+                        return {
+                            msg: "子组件data"
+                        }
+                    },
+                    methods: {
+                        show() {
+                            return "子组件的方法"
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

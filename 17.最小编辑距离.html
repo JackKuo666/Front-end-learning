@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>最小编辑距离</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>JavaScript 字符串的最小编辑距离: </h1>
+
+        <p>请输入两段相似的句子：</p>
+
+        <div class="panel-body form-inline">
+            <label>
+                句子1:
+                <input type="text" placeholder="最小编辑距离" class="form-control" v-model="str1">
+            </label>
+            <label>
+                句子2:
+                <input type="text" class="form-control"  placeholder="最小距离" v-model="str2" @keyup.enter="minDistance">
+            </label>
+            <input type="button" value="计算编辑距离" class="btn btn-primary" v-on:click="minDistance">
+        </div>
+
+        <p>编辑距离是:{{ cac_dis }}</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                str1: "最小编辑距离",
+                str2: "最小距离",
+                cac_dis: 2
+            },
+            methods: {
+                minDistance: function () {
+                    let s1 = this.str1;
+                    let s2 = this.str2;
+                    const len1 = s1.length;
+                    const len2 = s2.length;
+                    let matrix = [];
+                    for (let i = 0; i <= len1; i++) {
+                        // 构造二维数组
+                        matrix[i] = new Array()
+                        for (let j = 0; j <= len2; j++) {
+                            // 初始化
+                            if (i == 0) {
+                                matrix[i][j] = j
+                            } else if (j == 0) {
+                                matrix[i][j] = i
+                            } else {
+                                // 进行最小值分析
+                                let cost = 0;
+                                if (s1[i - 1] != s2[j - 1]) { // 相同为0，不同置1
+                                    cost = 1
+                                }
+                                const temp = matrix[i - 1][j - 1] + cost;
+                                matrix[i][j] = Math.min(matrix[i - 1][j] + 1, matrix[i][j - 1] + 1, temp)
+                            }
+                        }
+                    }
+                    this.cac_dis =  matrix[len1][len2];  //返回右下角的值
+
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

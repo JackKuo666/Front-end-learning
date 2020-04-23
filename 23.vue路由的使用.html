@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue路由的使用</title>
+    <script src="vue.js"></script>
+    <!--  1.导入 vue-router 路由模块  -->
+    <!--  注意: 只要这里导入这个包之后, html 页面上出现 [xxx.html#/] 这样的hash路由   -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        .router-link-active{
+            color: red;
+            font-weight: 800;
+            font-style: italic;
+            font-size: 30px;
+            text-decoration: underline;
+        }
+
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(140px);
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>一. 路由的用法是:实现不同页面之间的切换.</h3>
+        <p>路由使用方式1:使用\<\a\>标签</p>
+
+        <a href="#/login">登录</a>
+        <a href="#/register">注册</a>
+
+        <!-- 注意: 这个是 vue-router 提供的元素,专门用来作占位符,当匹配到组件时,就会展示到这里 -->
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+
+        <hr/>
+        <hr/>
+        <hr/>
+        <p>路由使用方式2:使用<\router-link\>标签</p>
+        <!--  router-link 默认渲染为一个<a>标签,可以通过tag属性修改 -->
+        <router-link to="/login" tag="span">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+
+
+        <p style="height: 300px"></p>
+        <h3>二. 路由的传参方式:</h3>
+
+        <p>路由传参方式1:使用query方式:/login?id=123&name=张三</p>
+        <!--  router-link 默认渲染为一个<a>标签,可以通过tag属性修改 -->
+        <router-link to="/login2?id=123&name=张三" tag="span">登录</router-link>
+        <router-link to="/register2/456/李四">注册</router-link>
+
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+
+
+        <hr/>
+        <hr/>
+        <hr/>
+        <p>路由传参方式2:使用params方式:/login?id=123&name=张三</p>
+        <!--  router-link 默认渲染为一个<a>标签,可以通过tag属性修改 -->
+        <router-link to="/login2?id=123&name=张三" tag="span">登录</router-link>
+        <router-link to="/register2/456/李四">注册</router-link>
+
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+
+
+        <p style="height: 300px"></p>
+
+
+    </div>
+
+    <script>
+        // 注意: 这里的路由component 的属性值只能是组件模板对象
+        var login = {
+            template: "<h3>登录组件</h3>",
+        };
+        var login2 = {
+            template: "<div><h3>登录组件</h3><p>路由传参方式1-可以使用query方式传递参数:<br>id:{{ $route.query.id }}<br>name:{{ $route.query.name }}</p></div>",
+            // 组件的私有生命周期钩子函数
+            created(){
+                console.log(this.$route)
+            }
+        };
+        var register = {
+            template: "<h3>注册组件</h3>"
+        };
+        var register2 = {
+            template: "<div><h3>注册组件</h3><p>路由传参方式2-可以使用params 方式传递参数:<br>id:{{ $route.params.id }}<br>name:{{ $route.params.name }}</p></div>"
+        };
+
+
+
+        // 2.创建一个 Vue-router 对象; 可以为构造函数传递一个配置对象
+        var routerObj = new VueRouter({
+        //    这个配置对象中的 route 表示: [路由匹配规则] 的意思
+            routes: [
+                // 每个路由匹配规则,都是一个对象,这个规则对象身上有两个必须的属性:
+                // path: 表示监听哪个路由链接地址
+                // component: 表示匹配的path对应的组件模板对象
+                { path: "/login", component: login},
+                { path: "/login2", component: login2},
+                { path: "/register", component: register},
+                { path: "/register2/:id/:name", component: register2},
+                { path: "/", redirect: "/login" } // 默认重定向
+            ]
+        });
+
+        var vm = new Vue({
+            el: "#app",
+            data: {},
+            methods: {},
+            // 将路由规则对象注册到 vm 实例上,用来监听 URL 地址的变化,然后展示对应的组件
+            router: routerObj
+        });
+    </script>
+
+</body>
+</html>

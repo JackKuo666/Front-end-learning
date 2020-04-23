@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件切换</title>
+    <script src="vue.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(150px);
+        }
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.5s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>1.第一种切换组件的方式:使用v-if v-else</h3>
+        <login v-if="flag"></login>
+        <register v-else="flag"></register>
+        <a href="" @click.prevent="flag=true">登录</a>
+        <a href="" @click.prevent="flag=false">注册</a>
+    </div>
+
+
+    <div id="app2">
+        <!--vue 提供了 component 占位符来展示 :is 绑定的要展示的组件名称-->
+        <hr/>
+        <h3>2.这是第二种切换组件的方式:使用component占位符</h3>
+        <component :is="comName"></component>
+        <a href="" @click.prevent="comName='login'">登录</a>
+        <a href="" @click.prevent="comName='register'">注册</a>
+    </div>
+
+    <hr />
+    <div id="app3">
+        <hr/>
+        <h3>3.这是切换动画介绍</h3>
+        <!--   这里要将要切换的元素放在 transition 标签中     -->
+        <!--   通过 mode 属性, 设置组件切换时候的 模式     -->
+        <transition mode="out-in">
+            <component :is="comName"></component>
+        </transition>
+
+        <a href="" @click.prevent="comName='login'">登录</a>
+        <a href="" @click.prevent="comName='register'">注册</a>
+    </div>
+
+
+    <hr/>
+    <p>总结:当前学习的 Vue 标签有:</p>
+    <p>component, template, transition, transitionGroup</p>
+
+    <script>
+        Vue.component("login", {
+            template: "<h3>登录组件</h3>"
+        });
+        Vue.component("register", {
+            template: "<h3>注册组件</h3>"
+        });
+        var vm = new Vue({
+            el: "#app",
+            data:{
+                flag: true
+            },
+            methods:{}
+        });
+        var vm2 = new Vue({
+            el: "#app2",
+            data:{
+                comName: 'login'
+            },
+            methods:{}
+        });
+        var vm3 = new Vue({
+            el: "#app3",
+            data:{
+                comName: 'login'
+            },
+            methods:{}
+        })
+
+    </script>
+
+</body>
+</html>

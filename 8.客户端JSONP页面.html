@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户端JSONP页面</title>
+</head>
+<body>
+
+    <div>若调用后端成功,会弹出alert.</div>
+    <script>
+        function show(data) {
+            alert("调用后端服务器输出：ok");
+            console.log(data)
+        }
+    </script>
+
+<!--    <script src="http://127.0.0.1:3000/getscript"></script>-->
+    <script src="http://127.0.0.1:3000/getscript?callback=show"></script>
+
+</body>
+</html>

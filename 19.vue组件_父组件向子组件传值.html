@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件_父组件向子组件传值</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--  子组件可以通过 属性绑定(v-bind:) 的形式将父组件的属性传递过来,
+                    但是必须在子组件中进行定义这个属性"parentmsg"      -->
+        <com1 v-bind:parentmsg="msg"></com1>
+    </div>
+
+    <script>
+        // 创建 vue 实例, 得到 ViewModel
+        // 这里的 vue实例 相对于子组件叫做 "父组件"
+        var vm = new Vue({
+            el: "#app",
+            data:{
+              msg: "123 - 父组件中的数据"
+            },
+            methods:{},
+
+            components:{
+                // "子组件"
+                // 结论: 经过演示,发现:子组件中,默认无法访问到父组件中的 data 上的数据和 methods 的方法
+                com1: {
+                    template: "<div><h3>456 - 这个是子组件 </h3><br><p>这里调用的是父组件: {{ parentmsg }}</p></div>",
+
+                    // 注意: 子组件的 data 数据是本身私有的, 比如: 子组件通过 Ajax 请求回来的数据,都可以放到 data 身上
+                    data() {
+                        return {
+                          title: "子组件title",
+                          content: "子组件内容"
+                        }
+                    },
+
+                    // 注意: 所有从父组件中传递过来的属性都必须得通过props传递过来,才能在子组件中使用
+                    //       另外: props 中的数据,都是只读的,无法修改
+                    props: ["parentmsg"],
+
+                    directives: {},
+                    filters: {},
+                    components: {},
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

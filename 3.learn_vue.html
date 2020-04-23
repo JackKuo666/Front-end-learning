@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title_Vue</title>
+    <script src="./vue.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>1.vue的两种渲染方式：文本插值和指令：</h3>
+        {{ message }}  <!--传递方式{{ }}-->
+        <br />
+        <span v-bind:title="message2"> 鼠标悬停几秒钟查看此处动态绑定的提示信息！</span>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#app",   //el属性：        元素名；表示这个Vue实例只控制app这个标签下的所有内容
+            data:{        //data属性：      存放的是 el 元素中要用到的数据
+                message: "Hello Vue!",      // 要渲染的数据
+                message2: "Hello v-bind"
+            }
+        });
+    </script>
+
+    <hr />
+    <h3>2.vue实例化的一个例子：包括使用文本插值的方式调用vue对象的属性和方法：</h3>
+    <div id="vue_det">
+        <p>site:{{ site }}<br /></p>
+        <p>url:{{ url }}<br /></p>
+        <p>{{ details() }}<br /></p>
+    </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#vue_det",
+            data: {
+                site: "菜鸟教程",
+                url: "www.runoob.com",
+                alexa: "10000"
+            },
+            methods:{
+                details: function () {
+                    return this.site + "good";
+
+                }
+            }
+        });
+        document.write("<strong>判断vue是否是响应式的：</strong>");
+        document.write(vm.$el == document.getElementById("vue_det"));
+    </script>
+
+    <hr />
+    <h3>3.计算属性（computed）的一个例子：</h3>
+
+    <div id="demoJs">
+        {{ fullNameJs }}
+    </div>
+
+    <script>
+        var mvJs = new Vue({
+            el: "#demoJs",
+            data: {
+                firstNameJs: "Bill" ,
+                lastNameJs: "Gates"
+            },
+            computed: {
+                fullNameJs: function(){
+                    return this.firstNameJs + " " + this.lastNameJs
+                }
+            }
+        });
+    </script>
+
+    <hr />
+    <h3>4.侦听器（watch）的一个例子：</h3>
+
+    <div id="watch-example">
+        <p>
+            Ask a yes/no question:<br />
+            比如：Is it Wednesday today? <br />
+            Is today Tuesday?
+            <input v-model="question">
+        </p>
+        <p>{{ answer }}</p>
+    </div>
+
+    <!-- 因为 AJAX 库和通用工具的生态已经相当丰富，Vue 核心代码没有重复 -->
+    <!-- 提供这些功能以保持精简。这也可以让你自由选择自己更熟悉的工具。 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script>
+        var watchExampleVM = new Vue({
+            el: '#watch-example',
+            data: {
+                question: '',
+                answer: 'I cannot give you an answer until you ask a question!'
+            },
+            watch: {
+                // 如果 `question` 发生改变，这个函数就会运行
+                question: function (newQuestion, oldQuestion) {
+                    this.answer = 'Waiting for you to stop typing...'
+                    this.debouncedGetAnswer()
+                }
+            },
+            created: function () {
+                // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
+                // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+                // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
+                // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
+                // 请参考：https://lodash.com/docs#debounce
+                this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+            },
+            methods: {
+                getAnswer: function () {
+                    if (this.question.indexOf('?') === -1) {
+                        this.answer = 'Questions usually contain a question mark. ;-)'
+                        return
+                    }
+                    this.answer = 'Thinking...'
+                    var vm = this
+                    axios.get('https://yesno.wtf/api')
+                        .then(function (response) {
+                            vm.answer = _.capitalize(response.data.answer)
+                        })
+                        .catch(function (error) {
+                            vm.answer = 'Error! Could not reach the API. ' + error
+                        })
+                }
+            }
+        })
+    </script>
+
+    <hr />
+    <h3>5.v-if v-else 的一个例子：</h3>
+    <div v-if="Math.random() > 0.5">
+        Now you see me
+    </div>
+    <div v-else>
+        Now you don't
+    </div>
+
+    <hr />
+    <h3>6.v-for 的一个例子：在组件上使用 v-for</h3>
+    <div id="todo-list-example">
+        <form v-on:submit.prevent="addNewTodo">
+            <label for="new-todo">Add a todo</label>
+            <input
+                    v-model="newTodoText"
+                    id="new-todo"
+                    placeholder="E.g. Feed the cat"
+            >
+            <button>Add</button>
+        </form>
+        <ul>
+            <li
+                    is="todo-item"
+                    v-for="(todo, index) in todos"
+                    v-bind:key="todo.id"
+                    v-bind:title="todo.title"
+                    v-on:remove="todos.splice(index, 1)"
+            ></li>
+        </ul>
+    </div>
+
+    <script>
+        Vue.component('todo-item', {
+            template: '\
+                <li>\
+                  {{ title }}\
+                  <button v-on:click="$emit(\'remove\')">Remove</button>\
+                </li>\
+              ',
+            props: ['title']
+        });
+
+        new Vue({
+            el: '#todo-list-example',
+            data: {
+                newTodoText: '',
+                todos: [
+                    {
+                        id: 1,
+                        title: 'Do the dishes',
+                    },
+                    {
+                        id: 2,
+                        title: 'Take out the trash',
+                    },
+                    {
+                        id: 3,
+                        title: 'Mow the lawn'
+                    }
+                ],
+                nextTodoId: 4
+            },
+            methods: {
+                addNewTodo: function () {
+                    this.todos.push({
+                        id: this.nextTodoId++,
+                        title: this.newTodoText
+                    });
+                    this.newTodoText = ''
+                }
+            }
+        })
+    </script>
+
+    <hr />
+    <h3>7.v-on 的一个例子：用 v-on 指令监听 DOM 事件，并在触发时运行一些 JavaScript 代码。</h3>
+    <div id="example-1">
+        <button v-on:click="counter += 1">Add 1</button>
+        <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+
+    <script>
+        var example1 = new Vue({
+            el: '#example-1',
+            data: {
+                counter: 0
+            }
+        })
+    </script>
+
+
+    <hr />
+    <h3>8.v-model 的一个例子：多个复选框，绑定到同一个数组：</h3>
+    <div id='example-3'>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>
+    </div>
+    <script>
+        new Vue({
+            el: '#example-3',
+            data: {
+                checkedNames: []
+            }
+        })
+    </script>
+
+    <hr />
+    <h3>9.Vue组件 的一个例子：</h3>
+    <div id="components-demo">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    <script>
+        // 定义一个名为 button-counter 的新组件
+        Vue.component('button-counter', {
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+        });
+        new Vue({ el: '#components-demo' });
+    </script>
+
+
+    <hr />
+    <h3>10.Vue过滤器 的一个例子：</h3>
+    <div id="vuefilter">
+        <div>{{ msg | msgFormat("de") }}</div>
+    </div>
+    <script>
+        // 定义一个 Vue 全局过滤器，名字叫做 msgFormat
+        Vue.filter("msgFormat", function (msg, arg) {
+            return msg.replace(/的/g, arg);
+        });
+
+
+        var vm11= new Vue({
+            el: "#vuefilter",
+            data: {
+                msg: "塞纳河畔 左岸的咖啡\n" +
+                    "我手一杯 品尝你的美\n" +
+                    "留下唇印 的嘴\n" +
+                    "花店玫瑰 名字写错 谁\n" +
+                    "告白气球 风吹到 对街\n" +
+                    "微笑 在天上飞"
+            },
+            methods:{
+
+            }
+        })
+    </script>
+
+
+</body>
+</html>

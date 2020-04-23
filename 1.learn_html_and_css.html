@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+<!--html中只能使用这个注释，不能使用css中的注释/* */-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+
+        ul.sidenav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 25%;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+        ul.sidenav li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        ul.sidenav li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        ul.sidenav li a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
+
+        div.content {
+            margin-left: 25%;
+            padding: 1px 16px;
+            height: 1000px;
+        }
+
+        @media screen and (max-width: 900px) {
+            ul.sidenav {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            ul.sidenav li a {
+                float: left;
+                padding: 15px;
+            }
+            div.content {margin-left: 0;}
+        }
+
+        @media screen and (max-width: 400px) {
+            ul.sidenav li a {
+                text-align: center;
+                float: none;
+            }
+        }
+
+        #id2{
+
+            background-color:  darkcyan;
+        }
+
+        span.gov{
+            text-decoration: underline;
+            color: red;
+        }
+        .suojin{
+            text-indent: 2em;
+
+        }
+
+        ol.a{
+            list-style-type: upper-latin;
+        }
+
+        img.fudong{
+            float: right;
+        }
+
+        p.pos_fixed{
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            color: red;
+
+        }
+
+        #overflowTest{
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            width: 80%;
+            height: 100px;
+            overflow: scroll;
+            border: 1px solid #ccc;
+        }
+
+        img.center{
+            display: block;
+            margin: 0 auto;
+        }
+
+    </style>
+    <link rel="stylesheet" href="css/new.css">
+</head>
+<body>
+    <ul class="sidenav">
+        <li><a class="active" href="#home">主页</a></li>
+        <li><a href="#news">新闻</a></li>
+        <li><a href="#contact">联系</a></li>
+        <li><a href="#about">关于</a></li>
+    </ul>
+
+
+    <div class="content">
+        <h1>海创出140年气象史上高温新纪录：40.6摄氏度</h1>
+
+        <p><span class="gov" >中央政府门户网站</span>　<a href="www.gov.cn" >www.gov.cn</a>　　 2013年07月26日 18时19分　　 来源：新华社</p>
+
+        <hr width="500" color="red" />
+        <h3>目录</h3>
+        <ul>
+            <a href="#text_lianjie">文字链接<br /></a>
+            <a href="#picture_lianjie">图片链接<br /></a>
+        </ul>
+        <hr width="500" color="red" />
+
+        <p>有序列表：</p>
+
+        <ol class="a">
+            <li>Coffee</li>
+            <li>Tea</li>
+            <li>Coca Cola</li>
+        </ol>
+
+
+        <div >
+            <p class="suojin"><b>新华社上海</b>７月２６日电（记者 李荣）２６日１３时３６分至４７分这一时间段，上海徐家汇气象观测站测得当日最高温达４０．６摄氏度。这是上海有气象记录以来１４０年的高温新纪录，打破了此前１９３４年创下的４０．２摄氏度的历史极值。</p>
+        </div>
+
+        <p class="suojin">
+            <img class="fudong" src="桌面壁纸.jpg" title="壁纸" width="300" border="10" />
+            上海已经连续２天发出了最高等级的红色高温警报。上海中心气象台首席服务官满莉萍说，今年副热带高压强度特别强，对上海及江南地区的控制“实在太稳定了”，整个７月份基本上都处在它的势力范围之内。２５日上海已出现了气象史上７月份“第四高”的高温值，这使得２６日的“基础”气温就很高，超过了３０摄氏度，然后不断地升温。此外，２６日白天风小，又吹的是西南风，特别是在中午之后这一个最易出现高温的时段，光照又比较强，所以气温“直线飙升”，一举冲破历史极值，出现了“创纪录”的极端酷暑天。
+        </p>
+
+        <p class="suojin" id="id2">
+            上海已经连续２天发出了最高等级的红色高温警报。上海中心气象台首席服务官满莉萍说，今年副热带高压强度特别强，对上海及江南地区的控制“实在太稳定了”，整个７月份基本上都处在它的势力范围之内。２５日上海已出现了气象史上７月份“第四高”的高温值，这使得２６日的“基础”气温就很高，超过了３０摄氏度，然后不断地升温。此外，２６日白天风小，又吹的是西南风，特别是在中午之后这一个最易出现高温的时段，光照又比较强，所以气温“直线飙升”，一举冲破历史极值，出现了“创纪录”的极端酷暑天。
+        </p>
+
+        <p class="suojin" id="overflowTest">
+            上海已经连续２天发出了最高等级的红色高温警报。上海中心气象台首席服务官满莉萍说，今年副热带高压强度特别强，对上海及江南地区的控制“实在太稳定了”，整个７月份基本上都处在它的势力范围之内。２５日上海已出现了气象史上７月份“第四高”的高温值，这使得２６日的“基础”气温就很高，超过了３０摄氏度，然后不断地升温。此外，２６日白天风小，又吹的是西南风，特别是在中午之后这一个最易出现高温的时段，光照又比较强，所以气温“直线飙升”，一举冲破历史极值，出现了“创纪录”的极端酷暑天。
+        </p>
+
+
+        <div class="suojin" style="width:1000px; height: 80px; background-color: #ffb7d5" >
+            <p>在上海历史上，出现４０摄氏度以上极端高温的几率并不大。根据相关资料，中心城区徐家汇观测站１４０年来仅出现了５次记录，除了这一次的新纪录，还有就是１９３４年７月１２日的４０．２摄氏度；１９３４年８月２５日、２００９年７月２０日、２０１０年８月１３日的４０摄氏度。</p>
+        </div>
+
+        <input type="text" name="comment" value="评论：" size="50">
+
+
+        <h3 id="text_lianjie">文字链接</h3>
+        <a href="http://www.baidu.com" target="_blank" >【百度】</a> <!-- 注释 -->
+
+        <hr />
+
+        <h3 id="picture_lianjie">图片链接</h3>
+        <a href="http://www.baidu.com" target="_blank"><img class="center" src="桌面壁纸.jpg" title="壁纸" width="800" border="10" align="center"/></a>
+
+
+        <div class="biaodan">
+            <form action="/action_page.php">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+                <label for="country">Country</label>
+                <select id="country" name="country">
+                    <option value="australia">Australia</option>
+                    <option value="canada">Canada</option>
+                    <option value="usa">USA</option>
+                </select>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>底部区域：</p>
+        </div>
+
+        <p class="pos_fixed">悬浮</p>
+    </div>
+
+
+
+</body>
+</html>

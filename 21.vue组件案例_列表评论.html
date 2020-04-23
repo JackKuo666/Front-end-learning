@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件_列表评论</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app">
+        <cmt-box @func="loadComments"></cmt-box>
+
+        <ul class="list-group">
+            <li class="list-group-item" v-for="item in list" :key="item.id">
+                <span class="badge">评论人: {{ item.user }}</span>
+                {{ item.content }}
+            </li>
+        </ul>
+    </div>
+
+
+    <template id="tmpl">
+        <div>
+            <div class="form-group">
+                <label>评论人: </label>
+                <input type="text" class="form-control" v-model="user">
+            </div>
+
+            <div class="form-group">
+                <label>评论内容: </label>
+                <textarea class="form-control" v-model="content"></textarea>
+            </div>
+
+            <div class="form-group">
+                <input type="button" value="发表评论" class="btn btn-primary" @click="postComment">
+            </div>
+        </div>
+    </template>
+
+
+    <script>
+        var commentBox = {
+            template: "#tmpl",
+            data(){
+                return{
+                    user: "",
+                    content: ""
+                }
+            },
+            methods: {
+                postComment(){
+                    var comment = {id: Date.now(), user: this.user, content:this.content};
+                    this.$emit("func", comment)
+                }
+            }
+        };
+
+        var vm = new Vue({
+            el: "#app",
+            data:{
+                list:[
+                    { id: Date.now(), user: "张三", content: "我叫张三"},
+                    { id: Date.now(), user: "李四", content: "我叫李四"},
+                    { id: Date.now(), user: "王五", content: "我叫王五"},
+                    { id: Date.now(), user: "赵六", content: "我叫赵六"},
+                ]
+            },
+            methods:{
+                loadComments(comment){
+                    this.list.unshift(comment)
+                }
+            },
+            components:{
+                "cmt-box":commentBox
+            }
+        })
+    </script>
+</body>
+</html>

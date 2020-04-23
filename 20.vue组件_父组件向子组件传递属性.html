@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件_父组件向子组件传递方法</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 注意: 子组件调用父组件的方法,需要使用 v-on 来进行事件绑定       -->
+        <com2 v-on:func="show"></com2>
+    </div>
+
+    <template id="temp1">
+        <div>
+            <h3>这个是 子组件</h3>
+            <input type="button" value="1.点击触发调用子组件方法" v-on:click="my_click">
+            <hr/>
+            <input type="button" value="2.点击触发调用父组件方法" v-on:click="self_func">
+        </div>
+    </template>
+
+
+    <script>
+        // 定义了一个字面量类型的 组件模板对象
+        var com2 = {
+            template: "#temp1",  // 通过id来将对应的 template 元素中的内容指定为组件模板
+            data(){
+              return{
+                  sonMsg:{name:"xxx", age: 18}
+              }
+            },
+            methods: {
+                my_click(){
+                    alert("调用子组件私有方法")
+                },
+                self_func(){
+                    // 在私有域中设置调用父组件方法的属性 func
+                    this.$emit('func', this.sonMsg)
+                }
+
+            }
+        };
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                fatherMsg: null
+            },
+            methods: {
+                show(msg){
+                    this.fatherMsg = msg;
+                    alert("调用了父组件的 show() 方法"+this.fatherMsg.name)
+                }
+            },
+            components:{
+                com2
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>

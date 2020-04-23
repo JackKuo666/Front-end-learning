@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn_JS</title>
+
+    <script>
+        var n;  // 声明一个变量
+        n = 18; // 给变量赋值
+
+        //声明并赋值一个变量
+        var age = 12, name = "xiaoming";
+
+        /*<!--变量名字：数字、字母、下划线、$;
+                     不能数字开头
+                     不能是关键字
+                     区分大小写
+                     尽量有意义
+                     尽量用驼峰法：userName*/
+        //交换变量
+        var a = 1, b = 2;
+        var c = a;
+
+        a = b;
+        b = c;
+        b ++;
+        a --;
+        console.log(typeof a);
+
+        // 注意： 在这个标签里必须使用js的注释方法
+        function displayDate() {
+            document.getElementById("demo").innerHTML=Date();
+        }
+        var str_1 = "1.将Js代码写在行内";
+
+
+        // if 判断
+        if(2>1){
+            document.write("<b>if的学习：</b><br/>");
+        }
+        else if(3>4){
+            alert("else if");
+        }
+        else{
+            alert("else");
+        }
+
+
+        // if 判断时间例子
+        var d = new Date();
+        var time = d.getHours();
+        if (time<10)
+        {
+            document.write("现在是早上:"+time.toLocaleString()+"点");
+        }
+        else if (time>=10 && time<16)
+        {
+            document.write("现在是白天："+time.toLocaleString()+"点");
+        }
+        else
+        {
+            document.write("现在是晚上："+time.toLocaleString()+"点");
+        }
+
+        // switch case 判断
+        var d=new Date();
+        var day = d.getDay();
+        switch (day)
+        {
+            case 0:
+                x="今天是星期日";
+                break;
+            case 1:
+                x="今天是星期一";
+                break;
+            case 2:
+                x="今天是星期二";
+                break;
+            case 3:
+                x="今天是星期三";
+                break;
+            case 4:
+                x="今天是星期四";
+                break;
+            case 5:
+                x="今天是星期五";
+                break;
+            case 6:
+                x="今天是星期六";
+                break;
+            default:
+                x = "不存在";
+                break;
+        }
+
+        document.write("<hr/><br/>"+"switch_case学习："+x);
+
+        // while循环
+        document.write("<hr/><br/>"+"while学习：<br/>");
+        var i = 0;
+        while (i<5){
+            x = "The number is " + i + "<br/>";
+            document.write(x);
+            i += 1
+        }
+
+        // do while循环
+        document.write("<hr/><br/>"+"do_while学习：<br/>");
+        var i = 0;
+        do{                                       //这里该循环至少会执行一次
+            x = "The number is " + i + "<br/>";
+            document.write(x);
+            i += 1
+        }
+        while (i<5)
+
+        // for 循环
+        document.write("<hr/><br/>"+"for循环学习：<br/>");
+        s = " ";
+        for(var i=0; i<10; i++){
+            for(var j=0; j<10; j++){
+                s += "*&nbsp";
+            }
+            s += "<br>";
+        }
+        document.write(s)
+
+        // for 循环
+        document.write("<hr/><br/>"+"for循环学习：<br/>");
+        cars = ["BMW", "VOlvo", "Saab", "Ford"];
+        for(var i=0, len=cars.length; i<len; i++){
+            document.write(i + ":" + cars[i]+"<br/>")
+        }
+
+
+        // for in 循环
+        document.write("<hr/><br/>"+"for_in 循环学习：<br/>");
+        cars = {"BMW":"500$", "VOlvo":"400$", "Saab":"300$", "Ford":"200$"};
+        for(x in cars){
+            document.write(x + ":" + cars[x] + "<br/>")
+        }
+        document.write("<hr/><br/>"+"注意：for in 循环遍历数组的时候是遍历的下标，而不是python中的元素：<br/>")
+        cars = ["BMW", "VOlvo", "Saab", "Ford"];
+        for(var i in cars){
+            document.write(i + ":" + cars[i]+"<br/>")
+        }
+
+
+        // break 跳出 for 循环
+        document.write("<hr/><br/>"+"break 跳出 for 循环学习：<br/>");
+        cars = {"BMW":"500$", "VOlvo":"400$", "Saab":"300$", "Ford":"200$"};
+        for(x in cars){
+            if(x == "Saab"){
+                document.write("遇到Saab,跳出for循环...");
+                break;
+            }
+            document.write(x + ":" + cars[x] + "<br/>")
+        }
+
+        // continue 跳过 for 循环的一个迭代
+        document.write("<hr/><br/>"+"break 跳出 for 循环学习：<br/>");
+        cars = {"BMW":"500$", "VOlvo":"400$", "Saab":"300$", "Ford":"200$"};
+        for(x in cars){
+            if(x == "Saab"){
+                document.write("遇到Saab,跳过本次for循环...<br />");
+                continue;
+            }
+            document.write(x + ":" + cars[x] + "<br/>")
+        }
+
+        // break 跳出 标签引用
+        document.write("<hr/><br/>"+"break 跳出 标签引用：<br/>");
+        cars=["BMW","Volvo","Saab","Ford"];
+        list:{
+            document.write(cars[0] + "<br>");
+            document.write(cars[1] + "<br>");
+            document.write(cars[2] + "<br>");
+            break list;
+            document.write(cars[3] + "<br>");
+            document.write(cars[4] + "<br>");
+            document.write(cars[5] + "<br>");
+        }
+
+        // 使用 constructor查看 对象的构造函数
+        document.write("<hr/><br/>"+"使用 constructor查看 对象的构造函数：<br/>");
+        document.write("John".constructor);
+
+
+        // 给数组（Array）对象创建新的方法
+        Array.prototype.myUcase=function(){
+            for (i=0;i<this.length;i++){
+                this[i]=this[i].toUpperCase();
+            }
+        };
+
+        function myFunction(){
+            var fruits = ["Banana", "Orange", "Apple", "Mango"];
+            fruits.myUcase();
+            var x=document.getElementById("shuzu");
+            x.innerHTML=fruits;
+        }
+
+        // 未声明的变量赋值
+        document.write("<hr/><br/>" + "给未声明的变量赋值：<br/>");
+        var var1 = 1;  // 声明一个变量，那么这个全局变量是不可配置
+        var2 = 2;      // 向未声明的变量赋值，那么这个变量就是window对象的一个属性，是可配置全局属性
+        document.write("<hr /><br />" + "这个是不可配置全局属性：" + this.var1);
+        document.write("<hr /><br />" + "这个是可配置全局属性：" + window.var2);
+
+        // 创建和使用对象属性以及使用对象方法
+        document.write("<hr/><br/>" + "创建和使用对象属性以及使用对象方法：<br/>");
+        var person = {
+            firstName: "John",
+            lastName : "Doe",
+            id : 5566,
+            fullName : function()
+            {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+        document.write("调用对象的方法：" + person.fullName() + "<br />")
+        document.write("调用对象的属性：" + person.id + "<br />")
+
+
+        // 内置对象Math
+        document.write("<hr/><br/>" + "内置对象Math：<br/>");
+        document.write("Math.random产生2-8之间的随机数：" + Math.floor(Math.random() * (8 - 2) + 2) + "<br />")
+
+        // 内置对象Date
+        function startTime(){
+            var today=new Date();
+            var h=today.getHours();
+            var m=today.getMinutes();
+            var s=today.getSeconds();// 在小于10的数字前加一个‘0’
+            m=checkTime(m);
+            s=checkTime(s);
+            document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+            t=setTimeout(function(){startTime()},500);
+        }
+        function checkTime(i){
+            if (i<10){
+                i="0" + i;
+            }
+            return i;
+        }
+
+
+
+
+    </script>
+</head>
+
+
+<body onload="startTime()">
+    <hr />
+    <p>2.这个是通过将Js代码写在script标签中的方式：</p>
+    <button type="button" onclick="displayDate()">显示日期</button>
+    <p id="demo">现在时间</p>
+
+    <!--1.将Js代码写在行内-->
+    <hr />
+
+    <input type="button" value="1.将JS代码写在行内" onclick="alert(str_1)">
+    <!--这里的alert()是一个Js代码-->
+
+    <hr />
+
+    <script src="2.learn_js.js"></script>
+
+    <hr />
+    <h3>学习数组：给数组（Array）对象创建新的方法</h3>
+    <p id="shuzu">单击按钮创建一个数组,调用 ucase（）方法, 并显示结果。</p>
+    <button onclick="myFunction()">点我</button>
+
+    <hr />
+    <div>内置对象Date()构造时钟：<br/></div>
+
+    <div id="txt"></div>
+
+
+    <hr />
+    <h3>学习try catch throw：</h3>
+    <p>不管输入是否正确，输入框都会再输入后清空。</p>
+    <p>请输入 5 ~ 10 之间的数字：</p>
+
+    <input id="demoTry" type="text">
+    <button type="button" onclick="funTry()">点我</button>
+
+    <p id="p01"></p>
+
+    <script>
+        function funTry() {
+            var message, x;
+            message = document.getElementById("p01");
+            message.innerHTML = "";
+            x = document.getElementById("demoTry").value;
+            try {
+                if(x == "") throw "值是空的";
+                if(isNaN(x)) throw "值不是一个数字";
+                x = Number(x);
+                if(x > 10) throw "太大";
+                else if(x < 5) throw "太小";
+                else{
+                    throw x;
+                }
+            }
+            catch(err) {
+                message.innerHTML = "错误: " + err + ".";
+            }
+            finally {
+                document.getElementById("demoTry").value = "";
+            }
+        }
+    </script>
+
+    <hr />
+
+    <h1>JavaScript 表单验证 </h1>
+
+    <p>请输入 1 到 10 之间的数字：</p>
+
+    <input id="numb">
+
+    <button type="button" onclick="funForm()">提交</button>
+
+    <p id="demoForm"></p>
+
+    <script>
+        function funForm() {
+            var x, text;
+
+            // 获取 id="numb" 的值
+            x = document.getElementById("numb").value;
+
+            // 如果输入的值 x 不是数字或者小于 1 或者大于 10，则提示错误 Not a Number or less than one or greater than 10
+            if (isNaN(x) || x < 1 || x > 10) {
+                text = "输入错误";
+            } else {
+                text = "输入正确";
+            }
+            document.getElementById("demoForm").innerHTML = text;
+        }
+    </script>
+
+    <hr />
+    <h3>JavaScript 验证 API: checkValidity() 方法</h3>
+    <p>输入数字并点击验证按钮:</p>
+
+    <input id="id12" type="number" min="100" max="300" required>
+    <button onclick="myFunction12()">验证</button>
+
+    <p>如果输入的数字小于 100 或大于300，会提示错误信息。</p>
+
+    <p id="demo12"></p>
+
+    <script>
+        function myFunction12() {
+            var inpObj = document.getElementById("id12");
+            if (inpObj.checkValidity() == false) {
+                document.getElementById("demo12").innerHTML = inpObj.validationMessage;
+            } else {
+                document.getElementById("demo12").innerHTML = "输入正确";
+            }
+        }
+    </script>
+
+
+    <hr />
+    <h3>JSON 字符串转Js对象：</h3>
+    <p id="demo13"></p>
+    <script>
+        var text = '{ "sites" : [' +
+            '{ "name":"Runoob" , "url":"www.runoob.com" },' +
+            '{ "name":"Google" , "url":"www.google.com" },' +
+            '{ "name":"Taobao" , "url":"www.taobao.com" } ]}';
+
+        obj = JSON.parse(text);
+        document.getElementById("demo13").innerHTML = obj.sites[1].name + " " + obj.sites[1].url;
+    </script>
+
+
+    <hr />
+    <h3>Js 对HTML DOM 事件的改变：</h3>
+    <div onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:#D94A38;width:120px;height:20px;padding:40px;">Mouse Over Me</div>
+    <script>
+        function mOver(obj){
+            obj.innerHTML="Thank You"
+        }
+        function mOut(obj){
+            obj.innerHTML="Mouse Over Me"
+        }
+    </script>
+
+
+    <hr />
+    <h3>Js 对HTML DOM EventListener 增加事件的改变：</h3>
+    <button id="myBtn2">点我</button>
+    <p id="demo2"></p>
+
+    <script>
+        var x = document.getElementById("myBtn2");
+        x.addEventListener("mouseover", myFunction2);
+        x.addEventListener("click", mySecondFunction2);
+        x.addEventListener("mouseout", myThirdFunction2);
+        function myFunction2() {
+            document.getElementById("demo2").innerHTML += "Moused over!<br>"
+        }
+        function mySecondFunction2() {
+            document.getElementById("demo2").innerHTML += "Clicked!<br>"
+        }
+        function myThirdFunction2() {
+            document.getElementById("demo2").innerHTML += "Moused out!<br>"
+        }
+    </script>
+
+
+
+    <script>
+        document.write("<hr/><h3>给已有的对象增加属性或方法：使用prototype:</h3>")
+        function Students(name, height, age) {
+            this.name = name;
+            this.height = height;
+            this.age = age;
+            this.outputInfo  = function() {
+                document.write('name = ' + this.name +  '<br\>' + 'height = ' + this.height + '<br\>');
+            }
+        }
+
+        //增加一个新方法
+        Students.prototype.newFunction = function() {
+            document.write('此方法是通过prototype继承后实现的');
+        }
+
+        var stu1 = new Students('zhang', 123, 12);
+        stu1.outputInfo();
+        stu1.newFunction();
+    </script>
+
+    <hr />
+    <h3>Js window.confirm 确认框：</h3>
+    <p>点击按钮，显示确认框。</p>
+    <button onclick="myFunction11()">点我</button>
+    <p id="demo11"></p>
+    <script>
+        function myFunction11(){
+            var x;
+            var r=confirm("按下按钮!");
+            if (r==true){
+                x="你按下了\"确定\"按钮!";
+            }
+            else{
+                x="你按下了\"取消\"按钮!";
+            }
+            document.getElementById("demo11").innerHTML=x;
+        }
+    </script>
+
+</body>
+</html>
+
+

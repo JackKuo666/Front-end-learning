@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件_通过对象字面量的形式定义组件的模板对象</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <mylogin></mylogin>
+    </div>
+
+    <script>
+        // 通过 对象 字面量的形式,定义了一个组件模板对象
+        var login = {
+          template: "<h3>这个是通过字面量形式定义的组件模板对象</h3>"
+        };
+
+
+        // 通过 Vue.component 把 组件模板对象,注册为一个全局的Vue组件,同时,为这个组件起了个名称 mylogin
+        // 我们可以通过 标签形式,在页面中引入这个组件
+        Vue.component("mylogin", login);
+
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods:{
+
+            }
+        })
+    </script>
+
+</body>
+</html>

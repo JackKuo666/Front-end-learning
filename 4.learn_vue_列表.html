@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+
+    <div id="app">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label>
+                    Id:
+                    <input type="text" class="form-control" v-model="id">
+                </label>
+                <label>
+                    Name:
+                    <input type="text" class="form-control" v-model="name" @keyup.enter="add">
+                </label>
+                <input type="button" value="添加" class="btn btn-primary" v-on:click="add">
+                <label>
+                    搜索名称关键字:
+                    <input type="text" class="form-control" v-model="keywords" v-focus v-color="'blue'">
+                </label>
+            </div>
+        </div>
+
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in search(keywords)" v-bind:key="item.id">
+                    <td>{{ item.id }}</td>
+                    <td v-text="item.name"></td>
+                    <td>{{ item.ctime | dateFormat }}</td>
+                    <td>
+                        <a href="" @click.prevent="del(item.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        // Vue全局过滤器，进行时间格式化
+        Vue.filter("dateFormat", function (datestr) {
+            let dt = new Date(datestr);
+
+            // yyy-mm-dd
+            let y = dt.getFullYear();
+            let m = (dt.getMonth() + 1).toString().padStart(2,"0");
+            let d = (dt.getDate() + 1).toString().padStart(2,"0");
+            let hh = dt.getHours();
+            let mm = (dt.getMinutes() + 1).toString().padStart(2,"0");
+            let ss = (dt.getSeconds() + 1).toString().padStart(2,"0");
+
+
+            // 使用模板字符串
+            return y + "-" + m + "-" + d + " " + hh + ":" + mm + ":" + ss;
+        });
+
+        // Vue 自定义全局按键修饰符
+        Vue.config.keyCodes.f2 = 113; // 将113的键值命名为f2
+
+        // // Vue 定义全局指令 v-focus
+        // Vue.directive("focus", {
+        //     bind:function (el) { // 1.每当指令绑定到元素上的时候，会立即执行这个bind函数，【执行一次】
+        //
+        //     },
+        //     inserted:function (el) { // 2.当元素插入到DOM中的时候，会执行 inserted 函数， 【触发一次】
+        //         el.focus()
+        //     },
+        //     updated:function ( ) {  // 3.当VNode更新的时候，会执行 updated,【可能触发多次】
+        //
+        //     }
+        // });
+
+        var vm = new Vue({
+
+            el: "#app",
+            data: {
+                id:"",
+                name:"",
+                keywords:"",
+                list:[
+                    { id: 1, name: "奔驰", ctime: new Date()},
+                    { id: 2, name: "宝马", ctime: new Date()}
+                ]
+            },
+            methods:{
+               add(){
+                   if(this.id === ""){
+                       alert("Id不能为空")
+                   }else {
+                       let car = {
+                           id: this.id,
+                           name: this.name,
+                           ctime: new Date()
+                       };
+                       this.list.push(car);
+                       this.id="";
+                       this.name=""
+                   }
+               },
+               del: function(id){
+                   // this.list.some((item, i)=>{
+                   //     if (item.id == id){
+                   //         // 删除数组低i个位置的语句
+                   //         this.list.splice(i,1);
+                   //         // 在数组some 方法中，如果 return true,就会立即终止这个数组的循环
+                   //         return true;
+                   //     }
+                   // })
+
+                   let idx = this.list.findIndex(item => {
+                       if (item.id == id){
+                           return true;
+                       }
+                   });
+
+                   this.list.splice(idx, 1);
+               },
+               search: function(keywords){
+                   if(keywords == ""){
+                       return this.list
+                   }else{
+                       // 1.使用forEach遍历数组
+                       // let newList = [];
+                       // this.list.forEach((item)=>{
+                       //     if(item.name.indexOf(keywords) != -1){
+                       //         newList.push(item)
+                       //     }
+                       // });
+                       // return newList;
+
+                       // 2.使用filter遍历数组
+                       let newList = this.list.filter(item =>{
+                           if(item.name.includes(keywords)){
+                               return item
+                           }
+                       });
+                       return newList;
+
+                   }
+               },
+
+            },
+            // 定义私有指令
+            directives:{
+               "focus":{
+                   inserted:function (el) {
+                       el.focus();
+                   }
+               },
+                "color":{
+                   bind:function (el, binding) {
+                       el.style.color = binding.value
+
+                   }
+                }
+            }
+
+        });
+    </script>
+
+</body>
+</html>
