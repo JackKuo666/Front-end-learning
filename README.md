@@ -47,4 +47,15 @@
 
 [23.vue路由的使用.html](https://jackkuo666.github.io/Front-end-learning/23.vue路由的使用.html)
 
+[24.vue路由的嵌套.html](https://jackkuo666.github.io/Front-end-learning/24.vue路由的嵌套.html)
+
+[25.vue路由_ 命名视图实现经典布局.html](https://jackkuo666.github.io/Front-end-learning/25.vue路由_ 命名视图实现经典布局.html)
+
+[26.名称案例_使用keyup事件实现.html](https://jackkuo666.github.io/Front-end-learning/26.名称案例_使用keyup事件实现.html)
+
+[27.名称案例_使用watch监听文本框数据的变化.html](https://jackkuo666.github.io/Front-end-learning/27.名称案例_使用watch监听文本框数据的变化.html)
+
+[28.vue的watch属性监视路由地址的改变.html](https://jackkuo666.github.io/Front-end-learning/28.vue的watch属性监视路由地址的改变.html)
+
+[29.名称案例_方式三_使用computed计算属性.html](https://jackkuo666.github.io/Front-end-learning/29.名称案例_方式三_使用computed计算属性.html)
 todo
