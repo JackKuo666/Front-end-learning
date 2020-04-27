@@ -118,6 +118,7 @@
                    }
                },
                del: function(id){
+                   // 1. 使用some
                    // this.list.some((item, i)=>{
                    //     if (item.id == id){
                    //         // 删除数组低i个位置的语句
@@ -127,6 +128,7 @@
                    //     }
                    // })
 
+                   // 2.使用findIndex
                    let idx = this.list.findIndex(item => {
                        if (item.id == id){
                            return true;

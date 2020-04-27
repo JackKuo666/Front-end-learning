@@ -28,7 +28,7 @@
     </style>
 </head>
 <body>
-    <div id="app">
+    <div id="app1">
         <h3>一. 路由的用法是:实现不同页面之间的切换.</h3>
         <p>路由使用方式1:使用\<\a\>标签</p>
 
@@ -39,7 +39,10 @@
         <transition mode="out-in">
             <router-view></router-view>
         </transition>
+    </div>
 
+
+    <div id="app2">
         <hr/>
         <hr/>
         <hr/>
@@ -51,8 +54,9 @@
         <transition mode="out-in">
             <router-view></router-view>
         </transition>
+    </div>
 
-
+    <div id="app3">
         <p style="height: 300px"></p>
         <h3>二. 路由的传参方式:</h3>
 
@@ -64,8 +68,9 @@
         <transition mode="out-in">
             <router-view></router-view>
         </transition>
+    </div>
 
-
+    <div id="app4">
         <hr/>
         <hr/>
         <hr/>
@@ -80,8 +85,6 @@
 
 
         <p style="height: 300px"></p>
-
-
     </div>
 
     <script>
@@ -120,8 +123,29 @@
             ]
         });
 
-        var vm = new Vue({
-            el: "#app",
+        var vm1 = new Vue({
+            el: "#app1",
+            data: {},
+            methods: {},
+            // 将路由规则对象注册到 vm 实例上,用来监听 URL 地址的变化,然后展示对应的组件
+            router: routerObj
+        });
+        var vm2 = new Vue({
+            el: "#app2",
+            data: {},
+            methods: {},
+            // 将路由规则对象注册到 vm 实例上,用来监听 URL 地址的变化,然后展示对应的组件
+            router: routerObj
+        });
+        var vm3 = new Vue({
+            el: "#app3",
+            data: {},
+            methods: {},
+            // 将路由规则对象注册到 vm 实例上,用来监听 URL 地址的变化,然后展示对应的组件
+            router: routerObj
+        });
+        var vm4 = new Vue({
+            el: "#app4",
             data: {},
             methods: {},
             // 将路由规则对象注册到 vm 实例上,用来监听 URL 地址的变化,然后展示对应的组件

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue的watch属性监视里也有地址的改变</title>
+    <script src="vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--  路由选择标签 -->
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <!--  路由选择结果展示容器      -->
+        <router-view></router-view>
+
+        <hr/>
+        <p>路由地址的改变：{{ path }}</p>
+    </div>
+
+
+
+
+    <script>
+        var login = {
+            template: "<h3>登录子组件</h3>"
+        };
+
+        var register = {
+            template: "<h3>注册子组件</h3>"
+        };
+
+        var routerObj = new VueRouter({
+            routes:[
+                { path: "/login", component: login},
+                { path: "/register", component: register},
+                { path: "/", redirect: "/login"},
+            ]
+        });
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                path: ""
+            },
+            methods: {},
+            router: routerObj,
+            // 使用watch属性来监听一些比如路由这样的非DOM事件（DOM事件比如keyup可以使用v-on绑定方法，来实现实时监听）
+            watch:{
+                // this.$route.path
+                "$route.path": function (newVal, oldVal) {
+                    this.path = newVal + " ----> " + oldVal
+
+                }
+            }
+      })
+
+    </script>
+</body>
+</html>

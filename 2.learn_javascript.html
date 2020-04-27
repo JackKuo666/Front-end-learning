@@ -27,16 +27,9 @@
         a --;
         console.log(typeof a);
 
-        // 注意： 在这个标签里必须使用js的注释方法
-        function displayDate() {
-            document.getElementById("demo").innerHTML=Date();
-        }
-        var str_1 = "1.将Js代码写在行内";
-
-
         // if 判断
         if(2>1){
-            document.write("<b>if的学习：</b><br/>");
+            document.write("<h3>1. if的学习：</h3><br/>");
         }
         else if(3>4){
             alert("else if");
@@ -93,10 +86,10 @@
                 break;
         }
 
-        document.write("<hr/><br/>"+"switch_case学习："+x);
+        document.write("<hr/><br/>"+"<h3>2. switch_case学习：</h3>"+x);
 
         // while循环
-        document.write("<hr/><br/>"+"while学习：<br/>");
+        document.write("<hr/><br/>"+"<h3>3. while学习：</h3><br/>");
         var i = 0;
         while (i<5){
             x = "The number is " + i + "<br/>";
@@ -105,17 +98,17 @@
         }
 
         // do while循环
-        document.write("<hr/><br/>"+"do_while学习：<br/>");
+        document.write("<hr/><br/>"+"<h3>4. do_while学习：</h3><br/>");
         var i = 0;
         do{                                       //这里该循环至少会执行一次
             x = "The number is " + i + "<br/>";
             document.write(x);
             i += 1
         }
-        while (i<5)
+        while (i<5);
 
         // for 循环
-        document.write("<hr/><br/>"+"for循环学习：<br/>");
+        document.write("<hr/><br/>"+"<h3>5. for循环学习：</h3><br/>");
         s = " ";
         for(var i=0; i<10; i++){
             for(var j=0; j<10; j++){
@@ -126,7 +119,7 @@
         document.write(s)
 
         // for 循环
-        document.write("<hr/><br/>"+"for循环学习：<br/>");
+        document.write("<hr/><br/>"+"<h3>6. for循环学习：</h3><br/>");
         cars = ["BMW", "VOlvo", "Saab", "Ford"];
         for(var i=0, len=cars.length; i<len; i++){
             document.write(i + ":" + cars[i]+"<br/>")
@@ -134,12 +127,12 @@
 
 
         // for in 循环
-        document.write("<hr/><br/>"+"for_in 循环学习：<br/>");
+        document.write("<hr/><br/>"+"<h3>7. for_in 循环学习：</h3><br/>");
         cars = {"BMW":"500$", "VOlvo":"400$", "Saab":"300$", "Ford":"200$"};
         for(x in cars){
             document.write(x + ":" + cars[x] + "<br/>")
         }
-        document.write("<hr/><br/>"+"注意：for in 循环遍历数组的时候是遍历的下标，而不是python中的元素：<br/>")
+        document.write("<hr/><br/>"+"<h3>8. 注意：for in 循环遍历数组的时候是遍历的下标，而不是python中的元素：</h3><br/>")
         cars = ["BMW", "VOlvo", "Saab", "Ford"];
         for(var i in cars){
             document.write(i + ":" + cars[i]+"<br/>")
@@ -147,7 +140,7 @@
 
 
         // break 跳出 for 循环
-        document.write("<hr/><br/>"+"break 跳出 for 循环学习：<br/>");
+        document.write("<hr/><br/>"+"<h3>9. break 跳出 for 循环学习：</h3><br/>");
         cars = {"BMW":"500$", "VOlvo":"400$", "Saab":"300$", "Ford":"200$"};
         for(x in cars){
             if(x == "Saab"){
@@ -158,7 +151,7 @@
         }
 
         // continue 跳过 for 循环的一个迭代
-        document.write("<hr/><br/>"+"break 跳出 for 循环学习：<br/>");
+        document.write("<hr/><br/>"+"<h3>10. break 跳出 for 循环学习：</h3><br/>");
         cars = {"BMW":"500$", "VOlvo":"400$", "Saab":"300$", "Ford":"200$"};
         for(x in cars){
             if(x == "Saab"){
@@ -169,7 +162,7 @@
         }
 
         // break 跳出 标签引用
-        document.write("<hr/><br/>"+"break 跳出 标签引用：<br/>");
+        document.write("<hr/><br/>"+"<h3>11. break 跳出 标签引用：</h3><br/>");
         cars=["BMW","Volvo","Saab","Ford"];
         list:{
             document.write(cars[0] + "<br>");
@@ -182,10 +175,67 @@
         }
 
         // 使用 constructor查看 对象的构造函数
-        document.write("<hr/><br/>"+"使用 constructor查看 对象的构造函数：<br/>");
+        document.write("<hr/><br/>"+"<h3>12. 使用 constructor查看 对象的构造函数：</h3><br/>");
         document.write("John".constructor);
 
+        // 未声明的变量赋值
+        document.write("<hr/><br/>" + "<h3>13. 给未声明的变量赋值：</h3><br/>");
+        var var1 = 1;  // 声明一个变量，那么这个全局变量是不可配置
+        var2 = 2;      // 向未声明的变量赋值，那么这个变量就是window对象的一个属性，是可配置全局属性
+        document.write("<br />" + "这个是不可配置全局属性：" + this.var1);
+        document.write("<br />" + "这个是可配置全局属性：" + window.var2);
 
+        // 创建和使用对象属性以及使用对象方法
+        document.write("<hr/><br/>" + "<h3>14. 创建和使用对象属性以及使用对象方法：</h3><br/>");
+        var person = {
+            firstName: "John",
+            lastName : "Doe",
+            id : 5566,
+            fullName : function()
+            {
+                return this.firstName + " " + this.lastName;
+            }
+        };
+        document.write("调用对象的方法：" + person.fullName() + "<br />");
+        document.write("调用对象的属性：" + person.id + "<br />");
+
+        // 内置对象Math
+        document.write("<hr/><br/>" + "<h3>15. 内置对象Math：</h3><br/>");
+        document.write("Math.random产生2-8之间的随机数：" + Math.floor(Math.random() * (8 - 2) + 2) + "<br />")
+
+
+    </script>
+</head>
+
+
+<body onload="startTime()">
+    <!--1.将Js代码写在行内-->
+    <hr />
+
+    <input type="button" value="1.将JS代码写在行内" onclick="alert(str_1)">
+    <!--这里的alert()是一个Js代码-->
+    <script>
+        var str_1 = "16.1. 将Js代码写在行内";
+    </script>
+
+    <hr />
+    <h3>16.2. 这个是通过将Js代码写在script标签中的方式：</h3>
+    <button type="button" onclick="displayDate()">显示日期</button>
+    <p id="demo">现在时间</p>
+    <script>
+        // 注意： 在这个标签里必须使用js的注释方法
+        function displayDate() {
+            document.getElementById("demo").innerHTML=Date();
+        }
+    </script>
+
+    <hr />
+    <h3>16.3. 通过src引用js代码</h3>
+    <p id="de3mo"></p>
+    <script src="2.learn_js.js"></script>
+
+    <hr />
+    <script>
         // 给数组（Array）对象创建新的方法
         Array.prototype.myUcase=function(){
             for (i=0;i<this.length;i++){
@@ -199,33 +249,16 @@
             var x=document.getElementById("shuzu");
             x.innerHTML=fruits;
         }
+    </script>
+    <h3>17. 学习数组：给数组（Array）对象创建新的方法</h3>
+    <p id="shuzu">单击按钮创建一个数组,调用 ucase（）方法, 并显示结果。</p>
+    <button onclick="myFunction()">点我</button>
 
-        // 未声明的变量赋值
-        document.write("<hr/><br/>" + "给未声明的变量赋值：<br/>");
-        var var1 = 1;  // 声明一个变量，那么这个全局变量是不可配置
-        var2 = 2;      // 向未声明的变量赋值，那么这个变量就是window对象的一个属性，是可配置全局属性
-        document.write("<hr /><br />" + "这个是不可配置全局属性：" + this.var1);
-        document.write("<hr /><br />" + "这个是可配置全局属性：" + window.var2);
+    <hr />
+    <div><h3>18. 内置对象Date()构造时钟：</h3><br/></div>
 
-        // 创建和使用对象属性以及使用对象方法
-        document.write("<hr/><br/>" + "创建和使用对象属性以及使用对象方法：<br/>");
-        var person = {
-            firstName: "John",
-            lastName : "Doe",
-            id : 5566,
-            fullName : function()
-            {
-                return this.firstName + " " + this.lastName;
-            }
-        };
-        document.write("调用对象的方法：" + person.fullName() + "<br />")
-        document.write("调用对象的属性：" + person.id + "<br />")
-
-
-        // 内置对象Math
-        document.write("<hr/><br/>" + "内置对象Math：<br/>");
-        document.write("Math.random产生2-8之间的随机数：" + Math.floor(Math.random() * (8 - 2) + 2) + "<br />")
-
+    <div id="txt"></div>
+    <script>
         // 内置对象Date
         function startTime(){
             var today=new Date();
@@ -235,7 +268,7 @@
             m=checkTime(m);
             s=checkTime(s);
             document.getElementById('txt').innerHTML=h+":"+m+":"+s;
-            t=setTimeout(function(){startTime()},500);
+            t=setTimeout(function(){startTime()},50);
         }
         function checkTime(i){
             if (i<10){
@@ -243,43 +276,10 @@
             }
             return i;
         }
-
-
-
-
     </script>
-</head>
-
-
-<body onload="startTime()">
-    <hr />
-    <p>2.这个是通过将Js代码写在script标签中的方式：</p>
-    <button type="button" onclick="displayDate()">显示日期</button>
-    <p id="demo">现在时间</p>
-
-    <!--1.将Js代码写在行内-->
-    <hr />
-
-    <input type="button" value="1.将JS代码写在行内" onclick="alert(str_1)">
-    <!--这里的alert()是一个Js代码-->
 
     <hr />
-
-    <script src="2.learn_js.js"></script>
-
-    <hr />
-    <h3>学习数组：给数组（Array）对象创建新的方法</h3>
-    <p id="shuzu">单击按钮创建一个数组,调用 ucase（）方法, 并显示结果。</p>
-    <button onclick="myFunction()">点我</button>
-
-    <hr />
-    <div>内置对象Date()构造时钟：<br/></div>
-
-    <div id="txt"></div>
-
-
-    <hr />
-    <h3>学习try catch throw：</h3>
+    <h3>19. 学习try catch throw：</h3>
     <p>不管输入是否正确，输入框都会再输入后清空。</p>
     <p>请输入 5 ~ 10 之间的数字：</p>
 
@@ -315,7 +315,7 @@
 
     <hr />
 
-    <h1>JavaScript 表单验证 </h1>
+    <h3>20. JavaScript 表单验证 </h3>
 
     <p>请输入 1 到 10 之间的数字：</p>
 
@@ -343,7 +343,7 @@
     </script>
 
     <hr />
-    <h3>JavaScript 验证 API: checkValidity() 方法</h3>
+    <h3>21. JavaScript 验证 API: checkValidity() 方法</h3>
     <p>输入数字并点击验证按钮:</p>
 
     <input id="id12" type="number" min="100" max="300" required>
@@ -366,7 +366,7 @@
 
 
     <hr />
-    <h3>JSON 字符串转Js对象：</h3>
+    <h3>22. JSON 字符串转Js对象：</h3>
     <p id="demo13"></p>
     <script>
         var text = '{ "sites" : [' +
@@ -380,7 +380,7 @@
 
 
     <hr />
-    <h3>Js 对HTML DOM 事件的改变：</h3>
+    <h3>23. Js 对HTML DOM 事件的改变：</h3>
     <div onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:#D94A38;width:120px;height:20px;padding:40px;">Mouse Over Me</div>
     <script>
         function mOver(obj){
@@ -393,7 +393,7 @@
 
 
     <hr />
-    <h3>Js 对HTML DOM EventListener 增加事件的改变：</h3>
+    <h3>24. Js 对HTML DOM EventListener 增加事件的改变：</h3>
     <button id="myBtn2">点我</button>
     <p id="demo2"></p>
 
@@ -416,7 +416,7 @@
 
 
     <script>
-        document.write("<hr/><h3>给已有的对象增加属性或方法：使用prototype:</h3>")
+        document.write("<hr/><h3>25. 给已有的对象增加属性或方法：使用prototype:</h3>")
         function Students(name, height, age) {
             this.name = name;
             this.height = height;
@@ -437,7 +437,7 @@
     </script>
 
     <hr />
-    <h3>Js window.confirm 确认框：</h3>
+    <h3>26. Js window.confirm 确认框：</h3>
     <p>点击按钮，显示确认框。</p>
     <button onclick="myFunction11()">点我</button>
     <p id="demo11"></p>

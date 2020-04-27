@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue路由_命名视图实现经典布局</title>
+    <script src="vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        .header{
+            background-color: whitesmoke;
+            height: 80px;
+        }
+        h3{
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+        }
+        .container {
+            display: flex;
+            height: 800px;
+        }
+        .left{
+            background-color: lightgreen;
+            flex: 2;
+        }
+        .main{
+            background-color: lightpink;
+            flex: 8;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+
+        <!-- 路由选择结果占位符-->
+            <!--default-->
+        <router-view></router-view>
+        <div class="container">
+            <!--指定只放置 left-->
+            <router-view name="left"></router-view>
+            <!--指定只放置 main-->
+            <router-view name="main"></router-view>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // 创建模板组件对象
+        var header = {
+            template: "<h3 class='header'>Header头部区域</h3>"
+        };
+
+        var leftBox = {
+            template: "<h3 class='left'>left区域:侧边栏</h3>"
+        };
+
+        var mainBox = {
+            template: "<h3 class='main'>mainBox区域:主体</h3>"
+        };
+
+        // 创建路由对象
+        var routerObj = new VueRouter({
+            routes:[
+                {
+                    path: "/",
+                    // 如果需要放很多组件，可以在这里放置, 同时需要在<router-view>中指定name属性
+                    components: {
+                        "default": header,
+                        "left": leftBox,
+                        "main": mainBox
+                    }
+
+                }
+            ]
+        });
+
+
+        var vm = new Vue({
+            el: "#app",
+            data: {},
+            methods: {},
+            router: routerObj
+        })
+    </script>
+
+</body>
+</html>

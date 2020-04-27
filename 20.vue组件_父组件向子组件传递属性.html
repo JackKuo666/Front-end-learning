@@ -49,6 +49,7 @@
             },
             methods: {
                 show(msg){
+                    // 通过这个方法同样可以子组件向父组件传值
                     this.fatherMsg = msg;
                     alert("调用了父组件的 show() 方法"+this.fatherMsg.name)
                 }

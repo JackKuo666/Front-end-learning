@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue路由的嵌套</title>
+    <script src="vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--路由选择链接-->
+        <router-link to="/account">Account</router-link>
+
+        <!--路由占位符，显示选择后的组件-->
+        <router-view></router-view>
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <h3>这个是 Account 组件</h3>
+
+            <!-- 在父路由模板对象中也可以放【子路由选择链接】，这个选择链接需要设置在/account/之后-->
+            <router-link to="/account/login">登录</router-link>
+            <router-link to="/account/register">注册</router-link>
+
+            <!--    在父路由模板对象中放置子路由链接之后需要放置【子路由占位符】 -->
+            <router-view></router-view>
+        </div>
+    </template>
+
+    <script>
+        // 组件的模板对象
+        var account = {
+            template: "#tmpl"
+        };
+
+        var login = {
+            template: "<p>登录组件</p>"
+        };
+
+        var register = {
+            template: "<p>注册组件</p>"
+        };
+
+        var routerObj = new VueRouter({
+            routes: [
+                {
+                    path: "/account",
+                    component: account,
+                    // 子路由需要通过在父路由的children 属性来设置，
+                    // 注意：path 前面不能使用 /
+                    children: [
+                        { path: "login", component: login},
+                        { path: "register", component: register}
+                    ]
+                }
+            ]
+        });
+
+        var vm = new Vue({
+            el: "#app",
+            data: {},
+            methods: {},
+            router: routerObj
+        })
+
+
+    </script>
+
+</body>
+</html>

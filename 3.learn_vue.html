@@ -53,6 +53,8 @@
     <h3>3.计算属性（computed）的一个例子：</h3>
 
     <div id="demoJs">
+        <input type="text" v-model="firstNameJs">
+        <input type="text" v-model="lastNameJs">
         {{ fullNameJs }}
     </div>
 
@@ -77,8 +79,9 @@
     <div id="watch-example">
         <p>
             Ask a yes/no question:<br />
-            比如：Is it Wednesday today? <br />
-            Is today Tuesday?
+            比如：<br />
+            Is it Wednesday today? <br />
+            Is today Tuesday?<br />
             <input v-model="question">
         </p>
         <p>{{ answer }}</p>
@@ -98,7 +101,7 @@
             watch: {
                 // 如果 `question` 发生改变，这个函数就会运行
                 question: function (newQuestion, oldQuestion) {
-                    this.answer = 'Waiting for you to stop typing...'
+                    this.answer = 'Waiting for you to stop typing...';
                     this.debouncedGetAnswer()
                 }
             },
@@ -162,14 +165,16 @@
         </ul>
     </div>
 
+    <template id="com1">
+        <li >
+            {{ title }}
+            <button v-on:click="$emit('remove')">Remove</button>
+        </li>
+    </template>
+
     <script>
         Vue.component('todo-item', {
-            template: '\
-                <li>\
-                  {{ title }}\
-                  <button v-on:click="$emit(\'remove\')">Remove</button>\
-                </li>\
-              ',
+            template: '#com1',
             props: ['title']
         });
 
@@ -227,11 +232,15 @@
     <div id='example-3'>
         <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
         <label for="jack">Jack</label>
+
         <input type="checkbox" id="john" value="John" v-model="checkedNames">
         <label for="john">John</label>
+
         <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
         <label for="mike">Mike</label>
+
         <br>
+
         <span>Checked names: {{ checkedNames }}</span>
     </div>
     <script>
