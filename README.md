@@ -49,7 +49,7 @@
 
 [24.vue路由的嵌套.html](https://jackkuo666.github.io/Front-end-learning/24.vue路由的嵌套.html)
 
-[25.vue路由_ 命名视图实现经典布局.html](https://jackkuo666.github.io/Front-end-learning/25.vue路由_ 命名视图实现经典布局.html)
+[25.vue路由_命名视图实现经典布局.html](https://jackkuo666.github.io/Front-end-learning/25.vue路由_命名视图实现经典布局.html)
 
 [26.名称案例_使用keyup事件实现.html](https://jackkuo666.github.io/Front-end-learning/26.名称案例_使用keyup事件实现.html)
 
