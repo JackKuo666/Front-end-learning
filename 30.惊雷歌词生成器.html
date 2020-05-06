@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>惊雷歌词生成器</title>
+    <script src="vue.js"></script>
+    <!--  在挂载vue属性的基础上挂载了 this.$http.get/post/jsonp 属性  -->
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <style>
+        .title{
+            top: 300px;
+            left: 800px;
+            position: absolute;
+        }
+        .container{
+            top: 300px;
+            left: 600px;
+            position: absolute;
+        }
+        .left{
+            top: 80px;
+            left: 1px;
+            position: relative;
+
+        }
+        .button{
+            left: 250px;
+            top: 0px;
+            position: absolute
+        }
+        .text_1 {
+            top: 30px;
+            left: 1px;
+            position: absolute;
+            resize: none;
+            overflow: hidden;
+            width: 300px;
+            min-height: 50px;
+        }
+
+        .text {
+            top: 85px;
+            left: 350px;
+            height: 300px;
+            position: absolute;
+            resize: none;
+            overflow: hidden;
+            width: 300px;
+            min-height: 50px;
+        }
+        lable {
+            font-weight: bold;
+        }
+        /* 底部样式 */
+        .footer {
+            bottom: 10px;
+            left: 600px;
+            position: absolute;
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+        }
+        button {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <script>
+        function auto_grow(element) {
+            element.style.height = "5px";
+            element.style.height = (element.scrollHeight) + "px";
+        }
+        function onload() {
+            auto_grow(document.getElementById("result"))
+        }
+        function generate() {
+            var subject = document.getElementById("subject").value;
+            if(subject.length == 0){
+                return;
+            }
+
+            var list = subject.split('。')  // 以。切割
+                .map(str => str.split('，'))  // 以，切割
+                .reduce((a, b) => a.concat(b),[]) // 合并数组
+                .filter(s => s !== '');  // 过滤空字符串
+
+            console.log("list", list);
+            let result = `　　"动次打次~动次打次~&#013;&#010;床前你明月光，&#013;&#010;低头我思故乡。&#013;&#010;举头他望明月，&#013;&#010;低头我思故乡"`;
+            try
+            {
+                //在此运行代码
+                // todo: 有后端了，可以弄个分词把这部分替代掉
+                let result_temp = `动次打次~<br/>动次打次~<br/><br/>`;
+                let inset = ["我", "你", "他"];
+
+                let i = 0;
+                list.forEach((line)=>{
+                    let j = "，";
+                    if(i%2 == 0){
+                        j = "，"
+                    }else{
+                        j = "。"
+                    }
+                    result_temp += line.slice(0,2) + inset[i] + line.slice(2) + j + '<br/>';
+                    if(i >= 2){
+                        i = 0
+                    } else{
+                        i += 1
+                    }
+                });
+                console.log("result_temp", result_temp);
+                let obj = document.getElementById("result");
+                obj.innerHTML = result_temp;
+
+            }
+            catch(err)
+            {
+                //在此处理错误
+                document.getElementById("result").value = result;
+            }
+
+            auto_grow(document.getElementById("result"));
+
+        }
+
+    </script>
+
+</head>
+<body onload="onload()">
+    <h3 class="title">惊雷歌词生成器</h3>
+    <div class="container" >
+        <div class="left">
+            <div class="col-sm-5 col-xs-12">
+                <form action="javascript:void(0);" autocomplete="off">
+                    <div class="form-group">
+                        <label for="subject">五言绝句：</label>
+                        <input type="text" class="text_1" id="subject" required placeholder="床前明月光，&#013;&#010;低头思故乡。&#013;&#010;举头望明月，&#013;&#010;低头思故乡。&#013;&#010;">
+                    </div>
+                    <input type="submit" value="生成" class="btn btn-primary button" onclick="generate()" />
+                </form>
+            </div>
+        </div>
+        <div class="text" id="result" onchange="auto_grow(this)" oninput="auto_grow(this)">动次打次~<br/>动次打次~<br/><br/>床前你明月光，<br/>低头我思故乡。<br/>举头他望明月，<br/>低头我思故乡。<br/></div>
+    </div>
+
+    <div class="footer">
+        可以从这里找一些五言绝句试一下。
+        <a href="https://www.sohu.com/a/215560508_100029251" target="_blank">古代最经典的68首五言绝句，你都会背吗？</a>
+    </div>
+
+
+</body>
+</html>
