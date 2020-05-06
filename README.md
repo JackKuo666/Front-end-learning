@@ -59,4 +59,8 @@
 
 [29.名称案例_方式三_使用computed计算属性.html](https://jackkuo666.github.io/Front-end-learning/29.名称案例_方式三_使用computed计算属性.html)
 
+[30.惊雷歌词生成器.html](https://jackkuo666.github.io/Front-end-learning/30.惊雷歌词生成器.html)
+
+
+
 todo
